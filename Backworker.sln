@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{8C6E5522-622D-48BA-AEDC-30565EE8AA16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "samples\Example\Example.csproj", "{65468776-6CE0-4F35-90FA-B2E6A9B0F942}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3918A0CE-DD63-4896-B60D-D7411BF1F139}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backworker", "src\Backworker\Backworker.csproj", "{6211CF4A-B867-4CEC-8E03-ED37619F9E24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C7E1160-DC56-4FAB-BC05-F6C28A2AF3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C7E1160-DC56-4FAB-BC05-F6C28A2AF3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C7E1160-DC56-4FAB-BC05-F6C28A2AF3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C7E1160-DC56-4FAB-BC05-F6C28A2AF3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65468776-6CE0-4F35-90FA-B2E6A9B0F942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65468776-6CE0-4F35-90FA-B2E6A9B0F942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65468776-6CE0-4F35-90FA-B2E6A9B0F942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65468776-6CE0-4F35-90FA-B2E6A9B0F942}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6211CF4A-B867-4CEC-8E03-ED37619F9E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6211CF4A-B867-4CEC-8E03-ED37619F9E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6211CF4A-B867-4CEC-8E03-ED37619F9E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6211CF4A-B867-4CEC-8E03-ED37619F9E24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{65468776-6CE0-4F35-90FA-B2E6A9B0F942} = {8C6E5522-622D-48BA-AEDC-30565EE8AA16}
+		{6211CF4A-B867-4CEC-8E03-ED37619F9E24} = {3918A0CE-DD63-4896-B60D-D7411BF1F139}
+	EndGlobalSection
+EndGlobal
