@@ -1,4 +1,4 @@
-﻿namespace Example.Application.Backworker;
+﻿namespace Example.Backworker;
 
 public enum TaskTypes
 {

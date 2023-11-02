@@ -1,7 +1,7 @@
 ﻿using Backworker.Runner;
-using Example.Application.Backworker.Tasks;
+using Example.Backworker.Tasks;
 
-namespace Example.Application.Backworker;
+namespace Example.Backworker;
 
 public class BackworkerTaskFactory : IBackworkerTaskFactory
 {

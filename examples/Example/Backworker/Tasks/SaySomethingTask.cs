@@ -1,6 +1,6 @@
 using Backworker.Runner;
 
-namespace Example.Application.Backworker.Tasks;
+namespace Example.Backworker.Tasks;
 
 public class SaySomethingTask : IBackworkerTaskAct
 {

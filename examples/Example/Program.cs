@@ -1,7 +1,7 @@
 using Backworker;
 using Backworker.Database.Postgres;
-using Example.Application.Backworker;
-using Example.Application.Backworker.Tasks;
+using Example.Backworker;
+using Example.Backworker.Tasks;
 
 IHostBuilder builder = Host.CreateDefaultBuilder(args);
 
