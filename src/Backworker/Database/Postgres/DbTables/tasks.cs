@@ -2,10 +2,10 @@ using Dapper.Contrib.Extensions;
 
 namespace Backworker.Database.Postgres.DbTables;
 
-[Table("tasks")]
+[Table("backworker.tasks")]
 internal class tasks
 {
-    [Key]
+    [ExplicitKey]
     public int id { get; set; }
     public string name { get; set; }
     public int type { get; set; }

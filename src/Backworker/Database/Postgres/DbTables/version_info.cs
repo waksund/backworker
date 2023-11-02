@@ -2,7 +2,7 @@ using Dapper.Contrib.Extensions;
 
 namespace Backworker.Database.Postgres.DbTables;
 
-[Table("version_info")]
+[Table("backworker.version_info")]
 internal class version_info
 {
     [Key]

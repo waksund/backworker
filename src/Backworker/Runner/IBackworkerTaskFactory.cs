@@ -2,5 +2,5 @@
 
 public interface IBackworkerTaskFactory
 {
-    IBackworkerTaskAct GetAct(int type);
+    IBackworkerTaskAct? GetTask(int type);
 }

@@ -21,36 +21,33 @@ internal class BackworkerManager
             _backworkerTaskFactory = backworkerTaskFactory;
         }
 
-        public Task StartAsync()
+        public async Task StartAsync()
         {
-            return Task.Run(async () => {
+            _logger.LogInformation("Backworker start");
+            _stop = false;
 
-                _logger.LogInformation("Backworker start");
-                _stop = false;
-
-                Stopwatch stopwatch = Stopwatch.StartNew();
-                while (!_stop)
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            while (!_stop)
+            {
+                try
                 {
-                    try
-                    {
-                        stopwatch.Restart();
+                    stopwatch.Restart();
 
-                        await RunTasksAsync();
+                    await RunTasksAsync();
 
-                        stopwatch.Stop();
+                    stopwatch.Stop();
 
-                        var sleepTime = 1000 - (int)stopwatch.ElapsedMilliseconds;
-                        if (sleepTime > 0 && !_stop)
-                            await Task.Delay(sleepTime);
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError("unknown error", e);
-                    }
+                    var sleepTime = 1000 - (int)stopwatch.ElapsedMilliseconds;
+                    if (sleepTime > 0 && !_stop)
+                        await Task.Delay(sleepTime);
                 }
+                catch (Exception e)
+                {
+                    _logger.LogError("unknown error", e);
+                }
+            }
 
-                _logger.LogInformation("Backworker stop");
-            });
+            _logger.LogInformation("Backworker stop");
         }
 
         public Task StopAsync()
@@ -66,14 +63,14 @@ internal class BackworkerManager
             if (runTask == null)
                 return;
 
-            IBackworkerTaskAct act = _backworkerTaskFactory.GetAct(runTask.Type);
+            IBackworkerTaskAct? task = _backworkerTaskFactory.GetTask(runTask.Type);
 
             try
             {
                 runTask.Start();
                 await _dbManager.SaveLogAsync(runTask);
 
-                await act.RunAsync(runTask.MagicString);
+                await task.RunAsync(runTask.MagicString);
                 runTask.Stop();
             }
             catch(Exception e)

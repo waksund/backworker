@@ -9,7 +9,7 @@ namespace Backworker.Database.Postgres;
 public class DbAcrionRunner
 {
     private readonly ILogger<DbAcrionRunner> _logger;
-    private readonly string _connectionString;
+    private readonly string? _connectionString;
 
     private NpgsqlConnection dbConnection => new NpgsqlConnection(_connectionString);
 

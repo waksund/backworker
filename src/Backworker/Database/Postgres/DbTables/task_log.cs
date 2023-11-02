@@ -2,10 +2,10 @@
 
 namespace Backworker.Database.Postgres.DbTables;
 
-[Table("task_log")]
+[Table("backworker.task_log")]
 internal class task_log
 {
-    [Key]
+    [ExplicitKey]
     public int id { get; set; }
     public string name { get; set; }
     public DateTime last_start_date { get; set; }

@@ -6,7 +6,7 @@ public static class BackworkerBuilderExtensions
 {
     public static IBackworkerBuilder WithGlobalConnectionString(
         this IBackworkerBuilder builder,
-        string connectionString)
+        string? connectionString)
     {
         builder.Services.Configure<BackworkerOptions>(opt => opt.ConnectionString = connectionString);
 

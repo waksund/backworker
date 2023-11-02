@@ -90,7 +90,7 @@ internal class DbManager : IDbManager, IBackworkerMigration
     {
         return _acrionRunner.PerformDbActionAsync(connection =>
         {
-            return connection.DeleteAsync(new {id = backworkerTask.Id});
+            return connection.DeleteAsync(new active_tasks {id = backworkerTask.Id});
         });
     }
 

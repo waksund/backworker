@@ -13,6 +13,8 @@ public static class BackworkerServiceCollectionExtensions
         services.AddTransient(typeof(IBackworkerTaskFactory), actFactoryType);
 
         AddTasksImplementations(services, assemblies);
+        
+        services.AddHostedService<BackworkerHostedService>();
 
         return services;
     }
