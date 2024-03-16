@@ -4,30 +4,19 @@ using Microsoft.Extensions.Logging;
 
 namespace Backworker.Runner;
 
-internal class BackworkerManager
-    {
-        private readonly IDbManager _dbManager;
-        private readonly ILogger<BackworkerManager> _logger;
-        private readonly IBackworkerTaskFactory _backworkerTaskFactory;
-        private bool _stop;
+internal class BackworkerManager(IDbManager dbManager,
+    ILogger<BackworkerManager> logger,
+    IBackworkerTaskFactory backworkerTaskFactory)
+{
+    private bool _stop;
 
-        public BackworkerManager(
-            IDbManager dbManager,
-            ILogger<BackworkerManager> logger,
-            IBackworkerTaskFactory backworkerTaskFactory)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            _dbManager = dbManager;
-            _logger = logger;
-            _backworkerTaskFactory = backworkerTaskFactory;
-        }
-
-        public async Task StartAsync()
-        {
-            _logger.LogInformation("Backworker start");
+            logger.LogInformation("Backworker start");
             _stop = false;
 
             Stopwatch stopwatch = Stopwatch.StartNew();
-            while (!_stop)
+            while (!_stop && !cancellationToken.IsCancellationRequested)
             {
                 try
                 {
@@ -37,17 +26,17 @@ internal class BackworkerManager
 
                     stopwatch.Stop();
 
-                    var sleepTime = 1000 - (int)stopwatch.ElapsedMilliseconds;
+                    var sleepTime = 500 - (int)stopwatch.ElapsedMilliseconds;
                     if (sleepTime > 0 && !_stop)
                         await Task.Delay(sleepTime);
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError("unknown error", e);
+                    logger.LogError("unknown error", e);
                 }
             }
 
-            _logger.LogInformation("Backworker stop");
+            logger.LogInformation("Backworker stop");
         }
 
         public Task StopAsync()
@@ -58,28 +47,28 @@ internal class BackworkerManager
 
         private async Task RunTasksAsync()
         {
-            Model.BackworkerTask runTask = await _dbManager.GetAndLockStartBackworkerTaskAsync();
+            Model.BackworkerTask runTask = await dbManager.GetAndLockStartBackworkerTaskAsync();
 
             if (runTask == null)
                 return;
 
-            IBackworkerTaskAct? task = _backworkerTaskFactory.GetTask(runTask.Type);
+            IBackworkerTaskAct? task = backworkerTaskFactory.GetTask(runTask.Type);
 
             try
             {
                 runTask.Start();
-                await _dbManager.SaveLogAsync(runTask);
+                await dbManager.SaveLogAsync(runTask);
 
                 await task.RunAsync(runTask.MagicString);
                 runTask.Stop();
             }
             catch(Exception e)
             {
-                _logger.LogError($"Uncknow error run backwork task {runTask}", e);
+                logger.LogError($"Uncknow error run backwork task {runTask}", e);
             }
 
-            await _dbManager.SaveLogAsync(runTask);
-            await _dbManager.UnlockBackworkerTask(runTask);
+            await dbManager.SaveLogAsync(runTask);
+            await dbManager.UnlockBackworkerTask(runTask);
 
         }
     }

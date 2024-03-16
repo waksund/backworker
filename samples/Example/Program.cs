@@ -3,19 +3,23 @@ using Backworker.Database.Postgres;
 using Example.Backworker;
 using Example.Backworker.Tasks;
 
-IHostBuilder builder = Host.CreateDefaultBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-builder.ConfigureServices(services =>
-{
-    services.UseBackworker(typeof(BackworkerTaskFactory), typeof(SayHelloTask).Assembly)
-        .ConfigureBackworker(builder =>
-            builder
-                .AddPostgres()
-                .WithGlobalConnectionString(Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING")));
-});
+builder.Services.AddLogging((loggingBuilder) => loggingBuilder
+    .SetMinimumLevel(LogLevel.Trace)
+    .AddConsole(options =>
+         {
+             options.TimestampFormat = "HH:mm:ss ";
+         })
+);
 
-builder.ConfigureWebHostDefaults(conf => conf.UseUrls("http://*:3000"));
+builder.Services.UseBackworker(typeof(SayHelloTask).Assembly)
+    .ConfigureBackworker(backworkerBuilder =>
+        backworkerBuilder
+            .AddPostgres()
+            .WithGlobalConnectionString(Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING")));
 
-IHost app = builder.Build();
+
+WebApplication app = builder.Build();
 
 app.Run();

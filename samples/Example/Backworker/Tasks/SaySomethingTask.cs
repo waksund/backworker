@@ -4,6 +4,8 @@ namespace Example.Backworker.Tasks;
 
 public class SaySomethingTask : IBackworkerTaskAct
 {
+    public static int Type => (int)TaskTypes.SaySomething;
+    
     private readonly ILogger<SaySomethingTask> _logger;
 
     public SaySomethingTask(ILogger<SaySomethingTask> logger)

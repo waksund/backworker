@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <Authors>Viktoria Dolzhenko</Authors>
@@ -9,7 +9,8 @@
         <PackageLicenseUrl>MIT</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/waksund/backworker</RepositoryUrl>
         <PackageReleaseNotes>initial release</PackageReleaseNotes>
-        <Version>7.0.2</Version>
+        <Version>8.0.0</Version>
+        <LangVersion>12</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,7 +20,7 @@
     <ItemGroup>
       <PackageReference Include="Dapper" Version="2.1.15" />
       <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
-      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
     </ItemGroup>
 

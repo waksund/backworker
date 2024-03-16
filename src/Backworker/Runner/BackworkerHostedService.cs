@@ -2,28 +2,20 @@ using Backworker.Database;
 using Microsoft.Extensions.Hosting;
 namespace Backworker.Runner;
 
-internal class BackworkerHostedService : IHostedService
-{
-    private readonly BackworkerManager _backworkerManager;
-    private readonly IBackworkerMigration _backworkerMigration;
-
-    public BackworkerHostedService(
+internal class BackworkerHostedService(
         BackworkerManager backworkerManager,
         IBackworkerMigration backworkerMigration)
-    {
-        _backworkerManager = backworkerManager;
-        _backworkerMigration = backworkerMigration;
-    }
-
+    : IHostedService
+{
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        await _backworkerMigration.MigrateUpAsync();
-        await _backworkerManager.StartAsync();
+        await backworkerMigration.MigrateUpAsync();
+        await backworkerManager.StartAsync(cancellationToken);
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
     {
-        _backworkerManager.StopAsync();
+        backworkerManager.StopAsync();
         return Task.CompletedTask;
     }
 }

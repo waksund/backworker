@@ -21,7 +21,7 @@ internal class DbManager : IDbManager, IBackworkerMigration
         return _acrionRunner.PerformDbActionAsync(async connection =>
         {
             BackworkerTask runTask = null;
-            DateTime now = DateTime.UtcNow;
+            DateTime now = DateTime.Now;
 
             await connection.ExecuteAsync("lock backworker.active_tasks");
 
