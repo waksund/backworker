@@ -6,11 +6,16 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Authors>Viktoria Dolzhenko</Authors>
         <Copyright>2023</Copyright>
-        <PackageLicenseUrl>MIT</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/waksund/backworker</RepositoryUrl>
         <PackageReleaseNotes>initial release</PackageReleaseNotes>
         <Version>8.0.0</Version>
         <LangVersion>12</LangVersion>
+        <PackageId>Backworker</PackageId>
+        <Description>Minimal job scheduler for background work in .NET</Description>
+        <PackageProjectUrl>https://github.com/waksund/backworker</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>background;worker;scheduler;job;dotnet</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
