@@ -1,5 +1,6 @@
 using Backworker;
 using Backworker.Database.Postgres;
+using Example;
 using Example.Backworker;
 using Example.Backworker.Tasks;
 
@@ -23,3 +24,4 @@ builder.Services.UseBackworker(typeof(SayHelloTask).Assembly)
 WebApplication app = builder.Build();
 
 app.Run();
+
